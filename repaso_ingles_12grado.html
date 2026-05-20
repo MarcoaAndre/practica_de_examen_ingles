@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso Inglés - 12° Grado</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --card2: #1c2333;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --yellow: #e3b341;
+    --purple: #bc8cff;
+    --orange: #ffa657;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --border: #30363d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    position: relative;
+  }
+  .tag {
+    display: inline-block;
+    background: rgba(88,166,255,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(88,166,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 24px 0;
+  }
+  .nav-tab {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover, .nav-tab.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+  .max-w { max-width: 900px; margin: 0 auto; }
+
+  /* ===== SUMMARY STYLES ===== */
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+  }
+  .card-blue::before { background: var(--accent); }
+  .card-green::before { background: var(--green); }
+  .card-purple::before { background: var(--purple); }
+  .card-orange::before { background: var(--orange); }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .grammar-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .grammar-table th {
+    background: rgba(88,166,255,0.15);
+    color: var(--accent);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+  .grammar-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    vertical-align: top;
+  }
+  .grammar-table tr:last-child td { border-bottom: none; }
+  .grammar-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .formula {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    background: rgba(88,166,255,0.1);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  .example-text {
+    font-style: italic;
+    color: var(--yellow);
+    font-size: 12px;
+  }
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .vocab-chip {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .vocab-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .tip-box {
+    background: rgba(63,185,80,0.1);
+    border: 1px solid rgba(63,185,80,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--green);
+  }
+  .tip-box strong { display: block; margin-bottom: 4px; }
+
+  /* ===== PRACTICE STYLES ===== */
+  .quiz-container { max-width: 700px; margin: 0 auto; }
+  .question-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .question-card.active { display: block; animation: slideIn 0.3s ease; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .q-type {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    color: var(--purple);
+  }
+  .q-number {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .q-text {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+  .q-blank { 
+    display: inline-block;
+    border-bottom: 2px solid var(--accent);
+    min-width: 80px;
+    text-align: center;
+    color: var(--accent);
+  }
+  .options { display: grid; gap: 10px; }
+  .option-btn {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card2);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(88,166,255,0.08);
+  }
+  .option-btn.correct { background: rgba(63,185,80,0.15); border-color: var(--green); color: var(--green); }
+  .option-btn.wrong { background: rgba(248,81,73,0.15); border-color: var(--red); color: var(--red); }
+  .option-btn:disabled { cursor: default; }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    display: none;
+    animation: fadeIn 0.3s;
+  }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  .feedback.correct-fb { background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); color: var(--green); }
+  .feedback.wrong-fb { background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3); color: var(--red); }
+  .btn-next {
+    margin-top: 16px;
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+    transition: opacity 0.2s;
+  }
+  .btn-next:hover { opacity: 0.85; }
+  .progress-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .score-display {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .score-display span { color: var(--accent); font-weight: 700; }
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    display: none;
+  }
+  .result-emoji { font-size: 64px; margin-bottom: 16px; }
+  .result-score {
+    font-size: 56px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .result-msg { color: var(--muted); font-size: 15px; margin: 10px 0 24px; }
+  .btn-restart {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 28px 0 16px;
+  }
+  .prog-tense-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .prog-tense-table th {
+    background: rgba(188,140,255,0.15);
+    color: var(--purple);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .prog-tense-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">📚 Colegio Técnico Profesional de Aserrí</div>
+  <h1>Repaso Inglés — 12° Grado</h1>
+  <p>Examen: 20 de mayo, 2026 · Profa. Licda. Lorna Cristina Cerdas Marín</p>
+</header>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('summary')">📖 Resumen</button>
+  <button class="nav-tab" onclick="showSection('practice')">✏️ Práctica</button>
+</div>
+
+<!-- ===== SUMMARY SECTION ===== -->
+<section id="summary" class="section active">
+  <div class="max-w">
+
+    <!-- Simple Past Tense -->
+    <div class="summary-card card-blue">
+      <div class="card-title">⚡ Simple Past Tense</div>
+      <div class="card-subtitle">Acciones completadas en el pasado</div>
+
+      <table class="grammar-table">
+        <tr>
+          <th>Forma</th>
+          <th>Estructura</th>
+          <th>Ejemplo</th>
+        </tr>
+        <tr>
+          <td><strong>Affirmative</strong></td>
+          <td><span class="formula">Subject + verb(past) + object</span></td>
+          <td class="example-text">The earthquake shook the city.</td>
+        </tr>
+        <tr>
+          <td><strong>Negative</strong></td>
+          <td><span class="formula">Subject + did not + verb(base)</span></td>
+          <td class="example-text">The flood did not destroy the town.</td>
+        </tr>
+        <tr>
+          <td><strong>Yes/No Question</strong></td>
+          <td><span class="formula">Did + subject + verb(base)?</span></td>
+          <td class="example-text">Did the volcano erupt last night?</td>
+        </tr>
+        <tr>
+          <td><strong>WH-Question</strong></td>
+          <td><span class="formula">WH-word + did + subject + verb(base)?</span></td>
+          <td class="example-text">Where did the tsunami hit?</td>
+        </tr>
+      </table>
+
+      <div class="tip-box">
+        <strong>💡 Truco clave</strong>
+        En negativas y preguntas con DID → el verbo va en BASE FORM (sin -ed ni irregular).<br>
+        ✅ <em>Did the flood destroy...?</em> &nbsp;&nbsp; ❌ <em>Did the flood destroyed...?</em>
+      </div>
+    </div>
+
+    <!-- Past Progressive -->
+    <div class="summary-card card-purple">
+      <div class="card-title">🔄 Past Progressive</div>
+      <div class="card-subtitle">Acción en progreso en un momento del pasado</div>
+
+      <table class="prog-tense-table">
+        <tr>
+          <th>Sujeto</th>
+          <th>Verbo "to be" pasado</th>
+          <th>Verbo + ing</th>
+        </tr>
+        <tr>
+          <td>I / He / She / It</td>
+          <td><strong style="color:var(--purple)">was</strong></td>
+          <td class="example-text">cleaning the beach.</td>
+        </tr>
+        <tr>
+          <td>You / We / They</td>
+          <td><strong style="color:var(--purple)">were</strong></td>
+          <td class="example-text">cleaning the beach.</td>
+        </tr>
+      </table>
+
+      <div class="tip-box" style="background:rgba(188,140,255,0.1);border-color:rgba(188,140,255,0.3);color:var(--purple)">
+        <strong>💡 Cuándo usarlo</strong>
+        Se usa para acciones que estaban <em>en progreso</em> cuando otra ocurrió.<br>
+        <em>"She <strong>was studying</strong> when the earthquake <strong>hit</strong>."</em>
+      </div>
+    </div>
+
+    <!-- Vocabulary: Natural Disasters -->
+    <div class="summary-card card-orange">
+      <div class="card-title">🌪️ Vocabulario — Desastres Naturales</div>
+      <div class="card-subtitle">Natural Disasters</div>
+      <div class="vocab-grid">
+        <div class="vocab-chip">🏔️ Earthquake</div>
+        <div class="vocab-chip">🌋 Volcanic Eruption</div>
+        <div class="vocab-chip">🌊 Tsunami</div>
+        <div class="vocab-chip">🌀 Hurricane</div>
+        <div class="vocab-chip">🌪️ Tornado</div>
+        <div class="vocab-chip">❄️ Blizzard</div>
+        <div class="vocab-chip">☀️ Drought</div>
+        <div class="vocab-chip">🌧️ Flood</div>
+        <div class="vocab-chip">🦠 Pandemic</div>
+        <div class="vocab-chip">🔥 Forest Fire</div>
+      </div>
+    </div>
+
+    <!-- Vocabulary: Environment Verbs -->
+    <div class="summary-card card-green">
+      <div class="card-title">🌿 Vocabulario — Verbos del Medio Ambiente</div>
+      <div class="card-subtitle">Environmental Action Verbs</div>
+      <div class="vocab-grid">
+        <div class="vocab-chip">⚠️ Threaten</div>
+        <div class="vocab-chip">🏞️ Reserve</div>
+        <div class="vocab-chip">📉 Use up</div>
+        <div class="vocab-chip">☠️ Pollute</div>
+        <div class="vocab-chip">💚 Save</div>
+        <div class="vocab-chip">🚨 Endanger</div>
+        <div class="vocab-chip">🛡️ Protect</div>
+      </div>
+      <div class="tip-box">
+        <strong>💡 Para el párrafo persuasivo (W.2)</strong>
+        Usa estos verbos para hablar de cómo los humanos afectan o protegen la naturaleza. Recuerda conjugarlos en Simple Past o Past Progressive según el contexto.
+      </div>
+    </div>
+
+    <!-- Persuasive Paragraph Tips -->
+    <div class="summary-card" style="background:var(--card);border-color:var(--border)">
+      <div class="card-title" style="color:var(--yellow)">✍️ Párrafo Persuasivo (W.2)</div>
+      <div class="card-subtitle">Sobre problemas ambientales y ayudar a la naturaleza</div>
+      <p style="font-size:14px;line-height:1.7;color:var(--text)">Un buen párrafo persuasivo tiene:</p>
+      <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px">
+          <span style="color:var(--yellow);font-weight:800;min-width:24px">1.</span>
+          <div><strong>Topic sentence</strong> — Afirma tu posición claramente.<br><span class="example-text">Humans are destroying the environment through pollution and deforestation.</span></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px">
+          <span style="color:var(--yellow);font-weight:800;min-width:24px">2.</span>
+          <div><strong>Supporting details</strong> — Da razones/ejemplos usando el vocabulario.<br><span class="example-text">Last year, a forest fire threatened many animal species...</span></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px">
+          <span style="color:var(--yellow);font-weight:800;min-width:24px">3.</span>
+          <div><strong>Concluding sentence</strong> — Refuerza tu opinión.<br><span class="example-text">We must protect and save our planet before it is too late.</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PRACTICE SECTION ===== -->
+<section id="practice" class="section">
+  <div class="quiz-container">
+    <div class="progress-bar">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="score-display">Puntaje: <span id="scoreText">0</span> / <span id="totalText">0</span></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question-card active" id="q1">
+      <div class="q-type">Simple Past — Affirmative</div>
+      <div class="q-number">Pregunta 1 de 12</div>
+      <div class="q-text">The tornado <span class="q-blank">_______</span> the entire village last night.</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','1')">destroy</button>
+        <button class="option-btn" onclick="answer(this,'correct','1')">destroyed</button>
+        <button class="option-btn" onclick="answer(this,'wrong','1')">was destroy</button>
+        <button class="option-btn" onclick="answer(this,'wrong','1')">destroys</button>
+      </div>
+      <div class="feedback" id="fb1"></div>
+      <button class="btn-next" id="next1" onclick="showQ(2)">Siguiente →</button>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" id="q2">
+      <div class="q-type">Simple Past — Negative</div>
+      <div class="q-number">Pregunta 2 de 12</div>
+      <div class="q-text">The government <span class="q-blank">_______</span> the forest fires in time.</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','2')">didn't stopped</button>
+        <button class="option-btn" onclick="answer(this,'wrong','2')">not stopped</button>
+        <button class="option-btn" onclick="answer(this,'correct','2')">didn't stop</button>
+        <button class="option-btn" onclick="answer(this,'wrong','2')">don't stop</button>
+      </div>
+      <div class="feedback" id="fb2"></div>
+      <button class="btn-next" id="next2" onclick="showQ(3)">Siguiente →</button>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" id="q3">
+      <div class="q-type">Simple Past — Yes/No Question</div>
+      <div class="q-number">Pregunta 3 de 12</div>
+      <div class="q-text">¿Cuál es la forma correcta de hacer una pregunta de Sí/No?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','3')">The hurricane did hit the coast?</button>
+        <button class="option-btn" onclick="answer(this,'correct','3')">Did the hurricane hit the coast?</button>
+        <button class="option-btn" onclick="answer(this,'wrong','3')">Did the hurricane hits the coast?</button>
+        <button class="option-btn" onclick="answer(this,'wrong','3')">Does the hurricane hit the coast?</button>
+      </div>
+      <div class="feedback" id="fb3"></div>
+      <button class="btn-next" id="next3" onclick="showQ(4)">Siguiente →</button>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" id="q4">
+      <div class="q-type">Simple Past — WH-Question</div>
+      <div class="q-number">Pregunta 4 de 12</div>
+      <div class="q-text"><span class="q-blank">_______</span> did the earthquake happen?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'correct','4')">Where</button>
+        <button class="option-btn" onclick="answer(this,'wrong','4')">When did</button>
+        <button class="option-btn" onclick="answer(this,'wrong','4')">How was</button>
+        <button class="option-btn" onclick="answer(this,'wrong','4')">What were</button>
+      </div>
+      <div class="feedback" id="fb4"></div>
+      <button class="btn-next" id="next4" onclick="showQ(5)">Siguiente →</button>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" id="q5">
+      <div class="q-type">Past Progressive</div>
+      <div class="q-number">Pregunta 5 de 12</div>
+      <div class="q-text">They <span class="q-blank">_______</span> the beach when the tsunami warning sounded.</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','5')">cleaned</button>
+        <button class="option-btn" onclick="answer(this,'wrong','5')">was cleaning</button>
+        <button class="option-btn" onclick="answer(this,'correct','5')">were cleaning</button>
+        <button class="option-btn" onclick="answer(this,'wrong','5')">are cleaning</button>
+      </div>
+      <div class="feedback" id="fb5"></div>
+      <button class="btn-next" id="next5" onclick="showQ(6)">Siguiente →</button>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" id="q6">
+      <div class="q-type">Past Progressive</div>
+      <div class="q-number">Pregunta 6 de 12</div>
+      <div class="q-text">She <span class="q-blank">_______</span> the animals when the flood started.</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','6')">were protecting</button>
+        <button class="option-btn" onclick="answer(this,'correct','6')">was protecting</button>
+        <button class="option-btn" onclick="answer(this,'wrong','6')">protected</button>
+        <button class="option-btn" onclick="answer(this,'wrong','6')">is protecting</button>
+      </div>
+      <div class="feedback" id="fb6"></div>
+      <button class="btn-next" id="next6" onclick="showQ(7)">Siguiente →</button>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" id="q7">
+      <div class="q-type">Vocabulario — Desastres Naturales</div>
+      <div class="q-number">Pregunta 7 de 12</div>
+      <div class="q-text">A large wave caused by an underwater earthquake is called a...</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','7')">Hurricane</button>
+        <button class="option-btn" onclick="answer(this,'wrong','7')">Blizzard</button>
+        <button class="option-btn" onclick="answer(this,'correct','7')">Tsunami</button>
+        <button class="option-btn" onclick="answer(this,'wrong','7')">Tornado</button>
+      </div>
+      <div class="feedback" id="fb7"></div>
+      <button class="btn-next" id="next7" onclick="showQ(8)">Siguiente →</button>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" id="q8">
+      <div class="q-type">Vocabulario — Desastres Naturales</div>
+      <div class="q-number">Pregunta 8 de 12</div>
+      <div class="q-text">A long period with very little rain and water shortage is called a...</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','8')">Flood</button>
+        <button class="option-btn" onclick="answer(this,'correct','8')">Drought</button>
+        <button class="option-btn" onclick="answer(this,'wrong','8')">Pandemic</button>
+        <button class="option-btn" onclick="answer(this,'wrong','8')">Volcanic Eruption</button>
+      </div>
+      <div class="feedback" id="fb8"></div>
+      <button class="btn-next" id="next8" onclick="showQ(9)">Siguiente →</button>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" id="q9">
+      <div class="q-type">Vocabulario — Verbos Ambientales</div>
+      <div class="q-number">Pregunta 9 de 12</div>
+      <div class="q-text">Factories _______ the rivers with chemical waste every day.</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','9')">protect</button>
+        <button class="option-btn" onclick="answer(this,'wrong','9')">save</button>
+        <button class="option-btn" onclick="answer(this,'wrong','9')">reserve</button>
+        <button class="option-btn" onclick="answer(this,'correct','9')">pollute</button>
+      </div>
+      <div class="feedback" id="fb9"></div>
+      <button class="btn-next" id="next9" onclick="showQ(10)">Siguiente →</button>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" id="q10">
+      <div class="q-type">Vocabulario — Verbos Ambientales</div>
+      <div class="q-number">Pregunta 10 de 12</div>
+      <div class="q-text">Hunting and deforestation _______ many animal species around the world.</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','10')">protect</button>
+        <button class="option-btn" onclick="answer(this,'correct','10')">endanger</button>
+        <button class="option-btn" onclick="answer(this,'wrong','10')">reserve</button>
+        <button class="option-btn" onclick="answer(this,'wrong','10')">save</button>
+      </div>
+      <div class="feedback" id="fb10"></div>
+      <button class="btn-next" id="next10" onclick="showQ(11)">Siguiente →</button>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question-card" id="q11">
+      <div class="q-type">Identificación de Tiempo Verbal</div>
+      <div class="q-number">Pregunta 11 de 12</div>
+      <div class="q-text">¿Cuál oración usa el <strong>Past Progressive</strong> correctamente?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','11')">I cleaned the park yesterday.</button>
+        <button class="option-btn" onclick="answer(this,'correct','11')">We were saving the turtles when the storm hit.</button>
+        <button class="option-btn" onclick="answer(this,'wrong','11')">Did she protect the forest?</button>
+        <button class="option-btn" onclick="answer(this,'wrong','11')">They use up all the water.</button>
+      </div>
+      <div class="feedback" id="fb11"></div>
+      <button class="btn-next" id="next11" onclick="showQ(12)">Siguiente →</button>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-card" id="q12">
+      <div class="q-type">Párrafo Persuasivo</div>
+      <div class="q-number">Pregunta 12 de 12</div>
+      <div class="q-text">¿Cuál oración sería una buena <strong>topic sentence</strong> para un párrafo persuasivo sobre el medio ambiente?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer(this,'wrong','12')">Yesterday I went to the park.</button>
+        <button class="option-btn" onclick="answer(this,'wrong','12')">The tornado destroyed 50 houses.</button>
+        <button class="option-btn" onclick="answer(this,'correct','12')">Humans must stop polluting the environment before it is too late.</button>
+        <button class="option-btn" onclick="answer(this,'wrong','12')">She was cleaning the beach last Saturday.</button>
+      </div>
+      <div class="feedback" id="fb12"></div>
+      <button class="btn-next" id="next12" onclick="showResult()">Ver Resultados →</button>
+    </div>
+
+    <!-- Result Card -->
+    <div class="result-card" id="resultCard">
+      <div class="result-emoji" id="resultEmoji">🎉</div>
+      <div class="result-score" id="resultScore">0/12</div>
+      <div class="result-msg" id="resultMsg"></div>
+      <button class="btn-restart" onclick="restartQuiz()">🔄 Intentar de Nuevo</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  let score = 0;
+  let answered = 0;
+  const total = 12;
+  const feedbacks = {
+    '1': { c: '✅ ¡Correcto! En afirmativas usamos el verbo en pasado: destroy → destroyed.', w: '❌ En oraciones afirmativas en Simple Past, el verbo va en su forma pasada (destroyed).'},
+    '2': { c: '✅ ¡Correcto! Con "didn\'t" el verbo va en base form: stop (no stopped).', w: '❌ Recuerda: didn\'t + verbo en BASE FORM. No se añade -ed después de didn\'t.'},
+    '3': { c: '✅ ¡Correcto! Did va al inicio: Did + subject + verb(base)?', w: '❌ La estructura correcta es: Did + subject + verb(base)? El verbo siempre en base form.'},
+    '4': { c: '✅ ¡Correcto! WH-word + did + subject + verb(base).', w: '❌ Las WH-questions usan: WH-word + did + subject + verb(base)?'},
+    '5': { c: '✅ ¡Correcto! "They" usa WERE + verb-ing en Past Progressive.', w: '❌ Con "they" (plural) usamos WERE + verb-ing. "Was" es para I/he/she/it.'},
+    '6': { c: '✅ ¡Correcto! "She" usa WAS + verb-ing en Past Progressive.', w: '❌ Con "she" (singular) usamos WAS + verb-ing. "Were" es para you/we/they.'},
+    '7': { c: '✅ ¡Correcto! Un Tsunami es una ola gigante causada por movimientos sísmicos bajo el agua.', w: '❌ Un Tsunami es la ola causada por terremotos submarinos.'},
+    '8': { c: '✅ ¡Correcto! Drought (sequía) = período prolongado de muy poca lluvia.', w: '❌ Drought = sequía. Es el período de escasez de lluvia y agua.'},
+    '9': { c: '✅ ¡Correcto! Pollute = contaminar. Las fábricas contaminan los ríos.', w: '❌ El verbo correcto es "pollute" (contaminar). Las fábricas contaminan, no protegen.'},
+    '10': { c: '✅ ¡Correcto! Endanger = poner en peligro especies animales.', w: '❌ Endanger significa poner en peligro. La caza y deforestación ponen en peligro las especies.'},
+    '11': { c: '✅ ¡Correcto! Past Progressive = was/were + verb-ing, usada mientras otra acción ocurría.', w: '❌ El Past Progressive usa was/were + verb-ing para indicar una acción en progreso en el pasado.'},
+    '12': { c: '✅ ¡Correcto! Una buena topic sentence expresa una posición clara y persuasiva sobre el tema.', w: '❌ La topic sentence debe expresar tu posición sobre el tema ambiental de forma persuasiva.'},
+  };
+
+  function answer(btn, result, qNum) {
+    const card = document.getElementById('q'+qNum);
+    const allBtns = card.querySelectorAll('.option-btn');
+    const fb = document.getElementById('fb'+qNum);
+    const nextBtn = document.getElementById('next'+qNum);
+    allBtns.forEach(b => b.disabled = true);
+    btn.classList.add(result === 'correct' ? 'correct' : 'wrong');
+    if (result === 'correct') {
+      score++;
+      fb.className = 'feedback correct-fb';
+      fb.textContent = feedbacks[qNum].c;
+    } else {
+      fb.className = 'feedback wrong-fb';
+      fb.textContent = feedbacks[qNum].w;
+      // Highlight correct
+      allBtns.forEach(b => { if(b.getAttribute('onclick').includes("'correct'")) b.classList.add('correct'); });
+    }
+    fb.style.display = 'block';
+    nextBtn.style.display = 'inline-block';
+    answered++;
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pct = (answered / total) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('scoreText').textContent = score;
+    document.getElementById('totalText').textContent = answered;
+  }
+
+  function showQ(n) {
+    document.getElementById('q'+(n-1)).classList.remove('active');
+    document.getElementById('q'+n).classList.add('active');
+  }
+
+  function showResult() {
+    document.getElementById('q12').classList.remove('active');
+    const rc = document.getElementById('resultCard');
+    rc.style.display = 'block';
+    rc.style.animation = 'slideIn 0.4s ease';
+    document.getElementById('resultScore').textContent = score + '/12';
+    const pct = Math.round((score/12)*100);
+    let emoji, msg;
+    if (pct >= 90) { emoji='🏆'; msg='¡Excelente! Estás muy bien preparado/a para el examen.'; }
+    else if (pct >= 70) { emoji='😊'; msg='¡Muy bien! Repasa los temas donde fallaste y estarás listo/a.'; }
+    else if (pct >= 50) { emoji='📚'; msg='Vas bien, pero te recomiendo repasar la gramática con más detalle.'; }
+    else { emoji='💪'; msg='No te rindas. Revisa el resumen y vuelve a intentarlo.'; }
+    document.getElementById('resultEmoji').textContent = emoji;
+    document.getElementById('resultMsg').textContent = msg;
+  }
+
+  function restartQuiz() {
+    score = 0; answered = 0;
+    updateProgress();
+    document.getElementById('resultCard').style.display = 'none';
+    for(let i=1;i<=12;i++){
+      const card = document.getElementById('q'+i);
+      card.classList.remove('active');
+      card.querySelectorAll('.option-btn').forEach(b=>{ b.disabled=false; b.className='option-btn'; });
+      document.getElementById('fb'+i).style.display='none';
+      document.getElementById('next'+i).style.display='none';
+    }
+    document.getElementById('q1').classList.add('active');
+    document.getElementById('progressFill').style.width='0%';
+    document.getElementById('scoreText').textContent='0';
+    document.getElementById('totalText').textContent='0';
+  }
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
